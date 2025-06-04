@@ -1,37 +1,1551 @@
 <!DOCTYPE html>
-<html><head><title>Debug</title></head>
-<body style="font-family: monospace; padding: 20px;">
-<h1>🔍 Debug Info</h1>
-<pre>{
-  "totalItems": 10,
-  "firstItemKeys": [
-    "json",
-    "pairedItem"
-  ],
-  "firstItemHasFields": false,
-  "firstItemFieldsKeys": [],
-  "sampleTitle": "NOT FOUND"
-}</pre>
-<hr>
-<h2>Raw First Item:</h2>
-<pre>{
-  "json": {
-    "id": "recddkkT2dcOEsubM",
-    "createdTime": "2025-06-04T12:05:02.000Z",
-    "fields": {
-      "Title": "SABER: Securing Artificial Intelligence for Battlefield ...",
-      "Description": "There is a growing desire to integrate rapidly advancing artificial intelligence (AI) technologies into Department of Defense (DoD) systems.",
-      "URL": "https://www.darpa.mil/research/programs/saber-securing-artificial-intelligence",
-      "Agency": "darpa.mil",
-      "Source": "Defense Agencies",
-      "Data_Source": "serpapi_defense",
-      "Date_Found": "2025-06-04T12:05:01.626Z",
-      "Status": "New - Needs Review",
-      "Manual_Priority": "Medium"
-    }
-  },
-  "pairedItem": {
-    "item": 0
-  }
-}</pre>
-</body></html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Grant Opportunity Dashboard</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>💰</text></svg>">
+    <style>
+        .line-clamp-2 { 
+            display: -webkit-box; 
+            -webkit-line-clamp: 2; 
+            -webkit-box-orient: vertical; 
+            overflow: hidden; 
+        }
+        .grant-card { 
+            transition: all 0.3s ease;
+        }
+        .grant-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+        }
+        .urgent-pulse {
+            animation: pulse 2s infinite;
+        }
+        @keyframes pulse {
+          0%, 100% { opacity: 1; }
+          50% { opacity: 0.7; }
+        }
+        
+        .refresh-indicator {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: #3b82f6;
+            color: white;
+            padding: 8px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            z-index: 1000;
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+    <div class="refresh-indicator">
+        🔄 Auto-updates daily
+    </div>
+
+    <div class="max-w-6xl mx-auto p-6">
+        <div class="mb-8">
+            <h1 class="text-4xl font-bold text-gray-900 mb-2">🎯 Grant Opportunity Dashboard</h1>
+            <div class="flex flex-wrap items-center gap-4 text-sm text-gray-600">
+                <div class="flex items-center gap-1">
+                    <span>📅</span>
+                    <span>Updated: 6/4/2025 at 12:12:44 PM</span>
+                </div>
+                <div class="flex items-center gap-1">
+                    <span>🤖</span>
+                    <span>Auto-generated from 25 sources</span>
+                </div>
+                <div class="flex items-center gap-1">
+                    <span>🔗</span>
+                    <span>Share this URL: <code class="bg-gray-200 px-2 py-1 rounded text-xs">https://sasqcow.github.io/grant-dashboard/</code></span>
+                </div>
+            </div>
+        </div>
+
+        
+
+        <div class="grid grid-cols-1 md:grid-cols-5 gap-4 mb-8">
+            <div class="bg-white p-6 rounded-lg shadow-md border-l-4 border-blue-500">
+                <div class="flex items-center justify-between">
+                    <div>
+                        <h3 class="text-lg font-semibold text-blue-600">Total Grants</h3>
+                        <p class="text-3xl font-bold text-gray-900">25</p>
+                    </div>
+                    <span class="text-3xl">📊</span>
+                </div>
+            </div>
+            
+            <div class="bg-white p-6 rounded-lg shadow-md border-l-4 border-green-500">
+                <div class="flex items-center justify-between">
+                    <div>
+                        <h3 class="text-lg font-semibold text-green-600">With Deadlines</h3>
+                        <p class="text-3xl font-bold text-gray-900">1</p>
+                        <p class="text-sm text-gray-500">4.0% coverage</p>
+                    </div>
+                    <span class="text-3xl">📅</span>
+                </div>
+            </div>
+            
+            <div class="bg-white p-6 rounded-lg shadow-md border-l-4 border-red-500">
+                <div class="flex items-center justify-between">
+                    <div>
+                        <h3 class="text-lg font-semibold text-red-600">Urgent (≤30d)</h3>
+                        <p class="text-3xl font-bold text-gray-900">0</p>
+                        <p class="text-sm text-gray-500">Need immediate action</p>
+                    </div>
+                    <span class="text-3xl">🚨</span>
+                </div>
+            </div>
+            
+            <div class="bg-white p-6 rounded-lg shadow-md border-l-4 border-gray-500">
+                <div class="flex items-center justify-between">
+                    <div>
+                        <h3 class="text-lg font-semibold text-gray-600">Expired</h3>
+                        <p class="text-3xl font-bold text-gray-900">1</p>
+                        <p class="text-sm text-gray-500">Check for next cycle</p>
+                    </div>
+                    <span class="text-3xl">⏰</span>
+                </div>
+            </div>
+            
+            <div class="bg-white p-6 rounded-lg shadow-md border-l-4 border-purple-500">
+                <div class="flex items-center justify-between">
+                    <div>
+                        <h3 class="text-lg font-semibold text-purple-600">Total Funding</h3>
+                        <p class="text-3xl font-bold text-gray-900">$0.0M</p>
+                        <p class="text-sm text-gray-500">Available opportunities</p>
+                    </div>
+                    <span class="text-3xl">💰</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="space-y-6">
+            
+                <div class="grant-card bg-white rounded-lg shadow-md border-l-4 p-6 border-gray-300 bg-gray-50 ">
+                    <div class="flex justify-between items-start mb-4">
+                        <div class="flex-1">
+                            <div class="flex items-center gap-3 mb-3">
+                                <h3 class="text-xl font-bold text-gray-900">Funding Opportunities</h3>
+                                <span class="text-sm px-3 py-1 rounded-full font-medium bg-gray-100 text-gray-800">
+                                    No deadline
+                                </span>
+                            </div>
+                            
+                            <p class="text-gray-600 mb-4 line-clamp-2 leading-relaxed">
+                                Artificial Intelligence/Machine Learning (AI/ML) Driven Personnel Retention Platform. Open Release Date: May 7, 2025 Open Date: May 7 ...
+                            </p>
+                            
+                            <div class="grid grid-cols-2 md:grid-cols-4 gap-4 text-sm">
+                                <div class="bg-gray-50 p-3 rounded">
+                                    <span class="font-medium text-gray-700 block">📅 Deadline</span>
+                                    <span class="text-gray-900">No deadline found</span>
+                                </div>
+                                <div class="bg-gray-50 p-3 rounded">
+                                    <span class="font-medium text-gray-700 block">💰 Funding</span>
+                                    <span class="text-gray-900">Not specified</span>
+                                </div>
+                                <div class="bg-gray-50 p-3 rounded">
+                                    <span class="font-medium text-gray-700 block">🏛️ Agency</span>
+                                    <span class="text-gray-900">| SBIR (.gov)</span>
+                                </div>
+                                <div class="bg-gray-50 p-3 rounded">
+                                    <span class="font-medium text-gray-700 block">📍 Source</span>
+                                    <span class="text-xs bg-blue-100 text-blue-800 px-2 py-1 rounded">Web Search - General</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="ml-6 flex flex-col gap-3">
+                            
+                                <a href="https://www.sbir.gov/topics" target="_blank" 
+                                   class="flex items-center gap-2 px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition-colors shadow-md">
+                                    <span>🔗</span>
+                                    <span>View Grant</span>
+                                </a>
+                            
+                            
+                            <div class="text-center">
+                                <span class="text-xs font-medium text-gray-600">Priority</span>
+                                <div class="px-3 py-1 rounded-full text-xs font-medium bg-yellow-100 text-yellow-800">
+                                    Medium
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    
+                </div>
+                
+                <div class="grant-card bg-white rounded-lg shadow-md border-l-4 p-6 border-gray-300 bg-gray-50 ">
+                    <div class="flex justify-between items-start mb-4">
+                        <div class="flex-1">
+                            <div class="flex items-center gap-3 mb-3">
+                                <h3 class="text-xl font-bold text-gray-900">Artificial Intelligence Grant – Apply Today | NSF SBIR</h3>
+                                <span class="text-sm px-3 py-1 rounded-full font-medium bg-gray-100 text-gray-800">
+                                    No deadline
+                                </span>
+                            </div>
+                            
+                            <p class="text-gray-600 mb-4 line-clamp-2 leading-relaxed">
+                                Artificial Intelligence (AI). The Artificial Intelligence topic focuses on ... Improving surgical outcomes with machine learning. KelaHealth combines a ...
+                            </p>
+                            
+                            <div class="grid grid-cols-2 md:grid-cols-4 gap-4 text-sm">
+                                <div class="bg-gray-50 p-3 rounded">
+                                    <span class="font-medium text-gray-700 block">📅 Deadline</span>
+                                    <span class="text-gray-900">No deadline found</span>
+                                </div>
+                                <div class="bg-gray-50 p-3 rounded">
+                                    <span class="font-medium text-gray-700 block">💰 Funding</span>
+                                    <span class="text-gray-900">Not specified</span>
+                                </div>
+                                <div class="bg-gray-50 p-3 rounded">
+                                    <span class="font-medium text-gray-700 block">🏛️ Agency</span>
+                                    <span class="text-gray-900">National Science Foundation (.gov)</span>
+                                </div>
+                                <div class="bg-gray-50 p-3 rounded">
+                                    <span class="font-medium text-gray-700 block">📍 Source</span>
+                                    <span class="text-xs bg-blue-100 text-blue-800 px-2 py-1 rounded">Web Search - General</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="ml-6 flex flex-col gap-3">
+                            
+                                <a href="https://seedfund.nsf.gov/topics/artificial-intelligence/" target="_blank" 
+                                   class="flex items-center gap-2 px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition-colors shadow-md">
+                                    <span>🔗</span>
+                                    <span>View Grant</span>
+                                </a>
+                            
+                            
+                            <div class="text-center">
+                                <span class="text-xs font-medium text-gray-600">Priority</span>
+                                <div class="px-3 py-1 rounded-full text-xs font-medium bg-yellow-100 text-yellow-800">
+                                    Medium
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    
+                </div>
+                
+                <div class="grant-card bg-white rounded-lg shadow-md border-l-4 p-6 border-gray-300 bg-gray-50 ">
+                    <div class="flex justify-between items-start mb-4">
+                        <div class="flex-1">
+                            <div class="flex items-center gap-3 mb-3">
+                                <h3 class="text-xl font-bold text-gray-900">Topic | SBIR</h3>
+                                <span class="text-sm px-3 py-1 rounded-full font-medium bg-gray-100 text-gray-800">
+                                    No deadline
+                                </span>
+                            </div>
+                            
+                            <p class="text-gray-600 mb-4 line-clamp-2 leading-relaxed">
+                                Artificial Intelligence/Machine Learning (AI/ML) Driven Personnel Retention Platform. Seal of the Agency: DOD. Funding Agency. DOD. USAF. Year: 2025. Topic ...
+                            </p>
+                            
+                            <div class="grid grid-cols-2 md:grid-cols-4 gap-4 text-sm">
+                                <div class="bg-gray-50 p-3 rounded">
+                                    <span class="font-medium text-gray-700 block">📅 Deadline</span>
+                                    <span class="text-gray-900">No deadline found</span>
+                                </div>
+                                <div class="bg-gray-50 p-3 rounded">
+                                    <span class="font-medium text-gray-700 block">💰 Funding</span>
+                                    <span class="text-gray-900">Not specified</span>
+                                </div>
+                                <div class="bg-gray-50 p-3 rounded">
+                                    <span class="font-medium text-gray-700 block">🏛️ Agency</span>
+                                    <span class="text-gray-900">| SBIR (.gov)</span>
+                                </div>
+                                <div class="bg-gray-50 p-3 rounded">
+                                    <span class="font-medium text-gray-700 block">📍 Source</span>
+                                    <span class="text-xs bg-blue-100 text-blue-800 px-2 py-1 rounded">Web Search - General</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="ml-6 flex flex-col gap-3">
+                            
+                                <a href="https://www.sbir.gov/topics/12057" target="_blank" 
+                                   class="flex items-center gap-2 px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition-colors shadow-md">
+                                    <span>🔗</span>
+                                    <span>View Grant</span>
+                                </a>
+                            
+                            
+                            <div class="text-center">
+                                <span class="text-xs font-medium text-gray-600">Priority</span>
+                                <div class="px-3 py-1 rounded-full text-xs font-medium bg-yellow-100 text-yellow-800">
+                                    Medium
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    
+                </div>
+                
+                <div class="grant-card bg-white rounded-lg shadow-md border-l-4 p-6 border-gray-300 bg-gray-50 ">
+                    <div class="flex justify-between items-start mb-4">
+                        <div class="flex-1">
+                            <div class="flex items-center gap-3 mb-3">
+                                <h3 class="text-xl font-bold text-gray-900">Leading Edge Acceleration Projects (LEAP) in Health ...</h3>
+                                <span class="text-sm px-3 py-1 rounded-full font-medium bg-gray-100 text-gray-800">
+                                    No deadline
+                                </span>
+                            </div>
+                            
+                            <p class="text-gray-600 mb-4 line-clamp-2 leading-relaxed">
+                                2025 Notice of Funding Opportunity (SEN) ... Area 2: Health IT Tools to Make Electronic Health Records (EHRs) Data Research – and Artificial Intelligence (AI)- ...
+                            </p>
+                            
+                            <div class="grid grid-cols-2 md:grid-cols-4 gap-4 text-sm">
+                                <div class="bg-gray-50 p-3 rounded">
+                                    <span class="font-medium text-gray-700 block">📅 Deadline</span>
+                                    <span class="text-gray-900">No deadline found</span>
+                                </div>
+                                <div class="bg-gray-50 p-3 rounded">
+                                    <span class="font-medium text-gray-700 block">💰 Funding</span>
+                                    <span class="text-gray-900">Not specified</span>
+                                </div>
+                                <div class="bg-gray-50 p-3 rounded">
+                                    <span class="font-medium text-gray-700 block">🏛️ Agency</span>
+                                    <span class="text-gray-900">Office of the National Coordinator for Health IT (.gov)</span>
+                                </div>
+                                <div class="bg-gray-50 p-3 rounded">
+                                    <span class="font-medium text-gray-700 block">📍 Source</span>
+                                    <span class="text-xs bg-blue-100 text-blue-800 px-2 py-1 rounded">Web Search - General</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="ml-6 flex flex-col gap-3">
+                            
+                                <a href="https://www.healthit.gov/topic/onc-funding-opportunities/leading-edge-acceleration-projects-leap-health-information" target="_blank" 
+                                   class="flex items-center gap-2 px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition-colors shadow-md">
+                                    <span>🔗</span>
+                                    <span>View Grant</span>
+                                </a>
+                            
+                            
+                            <div class="text-center">
+                                <span class="text-xs font-medium text-gray-600">Priority</span>
+                                <div class="px-3 py-1 rounded-full text-xs font-medium bg-yellow-100 text-yellow-800">
+                                    Medium
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    
+                </div>
+                
+                <div class="grant-card bg-white rounded-lg shadow-md border-l-4 p-6 border-gray-300 bg-gray-50 ">
+                    <div class="flex justify-between items-start mb-4">
+                        <div class="flex-1">
+                            <div class="flex items-center gap-3 mb-3">
+                                <h3 class="text-xl font-bold text-gray-900">SBIR Funding Opportunity Announc...</h3>
+                                <span class="text-sm px-3 py-1 rounded-full font-medium bg-gray-100 text-gray-800">
+                                    No deadline
+                                </span>
+                            </div>
+                            
+                            <p class="text-gray-600 mb-4 line-clamp-2 leading-relaxed">
+                                NOFO Issued. Monday, August 5, 2024, Friday, December 27, 2024. Document. DE-FOA ... Artificial Intelligence for Science · Biopreparedness Research Virtual ...
+                            </p>
+                            
+                            <div class="grid grid-cols-2 md:grid-cols-4 gap-4 text-sm">
+                                <div class="bg-gray-50 p-3 rounded">
+                                    <span class="font-medium text-gray-700 block">📅 Deadline</span>
+                                    <span class="text-gray-900">No deadline found</span>
+                                </div>
+                                <div class="bg-gray-50 p-3 rounded">
+                                    <span class="font-medium text-gray-700 block">💰 Funding</span>
+                                    <span class="text-gray-900">Not specified</span>
+                                </div>
+                                <div class="bg-gray-50 p-3 rounded">
+                                    <span class="font-medium text-gray-700 block">🏛️ Agency</span>
+                                    <span class="text-gray-900">OSTI (.gov)</span>
+                                </div>
+                                <div class="bg-gray-50 p-3 rounded">
+                                    <span class="font-medium text-gray-700 block">📍 Source</span>
+                                    <span class="text-xs bg-blue-100 text-blue-800 px-2 py-1 rounded">Web Search - General</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="ml-6 flex flex-col gap-3">
+                            
+                                <a href="https://science.osti.gov/sbir/Funding-Opportunities" target="_blank" 
+                                   class="flex items-center gap-2 px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition-colors shadow-md">
+                                    <span>🔗</span>
+                                    <span>View Grant</span>
+                                </a>
+                            
+                            
+                            <div class="text-center">
+                                <span class="text-xs font-medium text-gray-600">Priority</span>
+                                <div class="px-3 py-1 rounded-full text-xs font-medium bg-yellow-100 text-yellow-800">
+                                    Medium
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    
+                </div>
+                
+                <div class="grant-card bg-white rounded-lg shadow-md border-l-4 p-6 border-gray-300 bg-gray-50 ">
+                    <div class="flex justify-between items-start mb-4">
+                        <div class="flex-1">
+                            <div class="flex items-center gap-3 mb-3">
+                                <h3 class="text-xl font-bold text-gray-900">Novel Artificial Intelligence Approaches to Advance ...</h3>
+                                <span class="text-sm px-3 py-1 rounded-full font-medium bg-gray-100 text-gray-800">
+                                    No deadline
+                                </span>
+                            </div>
+                            
+                            <p class="text-gray-600 mb-4 line-clamp-2 leading-relaxed">
+                                Research funding opportunity focused on novel AI approaches to ... Artificial Intelligence (AI, inclusive of robotic process automation, machine learning ...
+                            </p>
+                            
+                            <div class="grid grid-cols-2 md:grid-cols-4 gap-4 text-sm">
+                                <div class="bg-gray-50 p-3 rounded">
+                                    <span class="font-medium text-gray-700 block">📅 Deadline</span>
+                                    <span class="text-gray-900">No deadline found</span>
+                                </div>
+                                <div class="bg-gray-50 p-3 rounded">
+                                    <span class="font-medium text-gray-700 block">💰 Funding</span>
+                                    <span class="text-gray-900">Not specified</span>
+                                </div>
+                                <div class="bg-gray-50 p-3 rounded">
+                                    <span class="font-medium text-gray-700 block">🏛️ Agency</span>
+                                    <span class="text-gray-900">professional.heart.org</span>
+                                </div>
+                                <div class="bg-gray-50 p-3 rounded">
+                                    <span class="font-medium text-gray-700 block">📍 Source</span>
+                                    <span class="text-xs bg-blue-100 text-blue-800 px-2 py-1 rounded">Web Search - General</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="ml-6 flex flex-col gap-3">
+                            
+                                <a href="https://professional.heart.org/en/research-programs/aha-funding-opportunities/novel-ai-approaches-to-advance-cv-and-brain-health" target="_blank" 
+                                   class="flex items-center gap-2 px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition-colors shadow-md">
+                                    <span>🔗</span>
+                                    <span>View Grant</span>
+                                </a>
+                            
+                            
+                            <div class="text-center">
+                                <span class="text-xs font-medium text-gray-600">Priority</span>
+                                <div class="px-3 py-1 rounded-full text-xs font-medium bg-yellow-100 text-yellow-800">
+                                    Medium
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    
+                </div>
+                
+                <div class="grant-card bg-white rounded-lg shadow-md border-l-4 p-6 border-gray-300 bg-gray-50 ">
+                    <div class="flex justify-between items-start mb-4">
+                        <div class="flex-1">
+                            <div class="flex items-center gap-3 mb-3">
+                                <h3 class="text-xl font-bold text-gray-900">Army SBIR|STTR Program – Small business igniting big ...</h3>
+                                <span class="text-sm px-3 py-1 rounded-full font-medium bg-gray-100 text-gray-800">
+                                    No deadline
+                                </span>
+                            </div>
+                            
+                            <p class="text-gray-600 mb-4 line-clamp-2 leading-relaxed">
+                                The U.S. Army launched a new funding opportunity for artificial intelligence and machine learning through... ... Army SBIR|STTR announces $250K funding ...
+                            </p>
+                            
+                            <div class="grid grid-cols-2 md:grid-cols-4 gap-4 text-sm">
+                                <div class="bg-gray-50 p-3 rounded">
+                                    <span class="font-medium text-gray-700 block">📅 Deadline</span>
+                                    <span class="text-gray-900">No deadline found</span>
+                                </div>
+                                <div class="bg-gray-50 p-3 rounded">
+                                    <span class="font-medium text-gray-700 block">💰 Funding</span>
+                                    <span class="text-gray-900">$250</span>
+                                </div>
+                                <div class="bg-gray-50 p-3 rounded">
+                                    <span class="font-medium text-gray-700 block">🏛️ Agency</span>
+                                    <span class="text-gray-900">usa.gov</span>
+                                </div>
+                                <div class="bg-gray-50 p-3 rounded">
+                                    <span class="font-medium text-gray-700 block">📍 Source</span>
+                                    <span class="text-xs bg-blue-100 text-blue-800 px-2 py-1 rounded">Web Search - General</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="ml-6 flex flex-col gap-3">
+                            
+                                <a href="https://go.usa.gov/xtA6V/" target="_blank" 
+                                   class="flex items-center gap-2 px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition-colors shadow-md">
+                                    <span>🔗</span>
+                                    <span>View Grant</span>
+                                </a>
+                            
+                            
+                            <div class="text-center">
+                                <span class="text-xs font-medium text-gray-600">Priority</span>
+                                <div class="px-3 py-1 rounded-full text-xs font-medium bg-yellow-100 text-yellow-800">
+                                    Medium
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    
+                </div>
+                
+                <div class="grant-card bg-white rounded-lg shadow-md border-l-4 p-6 border-gray-300 bg-gray-50 ">
+                    <div class="flex justify-between items-start mb-4">
+                        <div class="flex-1">
+                            <div class="flex items-center gap-3 mb-3">
+                                <h3 class="text-xl font-bold text-gray-900">AASA's 2nd AI Summit Call for Proposals Now Open</h3>
+                                <span class="text-sm px-3 py-1 rounded-full font-medium bg-gray-100 text-gray-800">
+                                    No deadline
+                                </span>
+                            </div>
+                            
+                            <p class="text-gray-600 mb-4 line-clamp-2 leading-relaxed">
+                                AASA's 2nd AI Summit call for proposals is open now through June 15th, 2025 ... artificial intelligence in public education. We're looking ...
+                            </p>
+                            
+                            <div class="grid grid-cols-2 md:grid-cols-4 gap-4 text-sm">
+                                <div class="bg-gray-50 p-3 rounded">
+                                    <span class="font-medium text-gray-700 block">📅 Deadline</span>
+                                    <span class="text-gray-900">No deadline found</span>
+                                </div>
+                                <div class="bg-gray-50 p-3 rounded">
+                                    <span class="font-medium text-gray-700 block">💰 Funding</span>
+                                    <span class="text-gray-900">Not specified</span>
+                                </div>
+                                <div class="bg-gray-50 p-3 rounded">
+                                    <span class="font-medium text-gray-700 block">🏛️ Agency</span>
+                                    <span class="text-gray-900">AASA, The School Superintendents Association</span>
+                                </div>
+                                <div class="bg-gray-50 p-3 rounded">
+                                    <span class="font-medium text-gray-700 block">📍 Source</span>
+                                    <span class="text-xs bg-blue-100 text-blue-800 px-2 py-1 rounded">Web Search - General</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="ml-6 flex flex-col gap-3">
+                            
+                                <a href="https://www.aasa.org/news-media/news/2025/04/22/aasa-s-2nd-ai-summit-call-for-proposals-now-open" target="_blank" 
+                                   class="flex items-center gap-2 px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition-colors shadow-md">
+                                    <span>🔗</span>
+                                    <span>View Grant</span>
+                                </a>
+                            
+                            
+                            <div class="text-center">
+                                <span class="text-xs font-medium text-gray-600">Priority</span>
+                                <div class="px-3 py-1 rounded-full text-xs font-medium bg-yellow-100 text-yellow-800">
+                                    Medium
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    
+                </div>
+                
+                <div class="grant-card bg-white rounded-lg shadow-md border-l-4 p-6 border-gray-300 bg-gray-50 ">
+                    <div class="flex justify-between items-start mb-4">
+                        <div class="flex-1">
+                            <div class="flex items-center gap-3 mb-3">
+                                <h3 class="text-xl font-bold text-gray-900">Small Business Innovation Research Program (SBIR) | NIST</h3>
+                                <span class="text-sm px-3 py-1 rounded-full font-medium bg-gray-100 text-gray-800">
+                                    No deadline
+                                </span>
+                            </div>
+                            
+                            <p class="text-gray-600 mb-4 line-clamp-2 leading-relaxed">
+                                NIST has released its SBIR FY2025 Phase II Notice of Funding Opportunity (NOFO) No. 2025-NIST-SBIR-02. Please note, only previous FY24 Phase I award recipients ...
+                            </p>
+                            
+                            <div class="grid grid-cols-2 md:grid-cols-4 gap-4 text-sm">
+                                <div class="bg-gray-50 p-3 rounded">
+                                    <span class="font-medium text-gray-700 block">📅 Deadline</span>
+                                    <span class="text-gray-900">No deadline found</span>
+                                </div>
+                                <div class="bg-gray-50 p-3 rounded">
+                                    <span class="font-medium text-gray-700 block">💰 Funding</span>
+                                    <span class="text-gray-900">Not specified</span>
+                                </div>
+                                <div class="bg-gray-50 p-3 rounded">
+                                    <span class="font-medium text-gray-700 block">🏛️ Agency</span>
+                                    <span class="text-gray-900">National Institute of Standards and Technology (.gov)</span>
+                                </div>
+                                <div class="bg-gray-50 p-3 rounded">
+                                    <span class="font-medium text-gray-700 block">📍 Source</span>
+                                    <span class="text-xs bg-blue-100 text-blue-800 px-2 py-1 rounded">Web Search - General</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="ml-6 flex flex-col gap-3">
+                            
+                                <a href="https://www.nist.gov/tpo/small-business-innovation-research-program-sbir" target="_blank" 
+                                   class="flex items-center gap-2 px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition-colors shadow-md">
+                                    <span>🔗</span>
+                                    <span>View Grant</span>
+                                </a>
+                            
+                            
+                            <div class="text-center">
+                                <span class="text-xs font-medium text-gray-600">Priority</span>
+                                <div class="px-3 py-1 rounded-full text-xs font-medium bg-yellow-100 text-yellow-800">
+                                    Medium
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    
+                </div>
+                
+                <div class="grant-card bg-white rounded-lg shadow-md border-l-4 p-6 border-gray-300 bg-gray-50 ">
+                    <div class="flex justify-between items-start mb-4">
+                        <div class="flex-1">
+                            <div class="flex items-center gap-3 mb-3">
+                                <h3 class="text-xl font-bold text-gray-900">AI for Health Seed Grant | Research | WashU</h3>
+                                <span class="text-sm px-3 py-1 rounded-full font-medium bg-gray-100 text-gray-800">
+                                    No deadline
+                                </span>
+                            </div>
+                            
+                            <p class="text-gray-600 mb-4 line-clamp-2 leading-relaxed">
+                                2025 call for proposals. Supporting groundbreaking interdisciplinary ... Artificial Intelligence (AI) to address critical challenges in health. This ...
+                            </p>
+                            
+                            <div class="grid grid-cols-2 md:grid-cols-4 gap-4 text-sm">
+                                <div class="bg-gray-50 p-3 rounded">
+                                    <span class="font-medium text-gray-700 block">📅 Deadline</span>
+                                    <span class="text-gray-900">No deadline found</span>
+                                </div>
+                                <div class="bg-gray-50 p-3 rounded">
+                                    <span class="font-medium text-gray-700 block">💰 Funding</span>
+                                    <span class="text-gray-900">Not specified</span>
+                                </div>
+                                <div class="bg-gray-50 p-3 rounded">
+                                    <span class="font-medium text-gray-700 block">🏛️ Agency</span>
+                                    <span class="text-gray-900">Office of the Vice Chancellor for Research | WashU</span>
+                                </div>
+                                <div class="bg-gray-50 p-3 rounded">
+                                    <span class="font-medium text-gray-700 block">📍 Source</span>
+                                    <span class="text-xs bg-blue-100 text-blue-800 px-2 py-1 rounded">Web Search - General</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="ml-6 flex flex-col gap-3">
+                            
+                                <a href="https://research.washu.edu/funding/here-next-research-funding/ai-for-health-seed-grant/" target="_blank" 
+                                   class="flex items-center gap-2 px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition-colors shadow-md">
+                                    <span>🔗</span>
+                                    <span>View Grant</span>
+                                </a>
+                            
+                            
+                            <div class="text-center">
+                                <span class="text-xs font-medium text-gray-600">Priority</span>
+                                <div class="px-3 py-1 rounded-full text-xs font-medium bg-yellow-100 text-yellow-800">
+                                    Medium
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    
+                </div>
+                
+                <div class="grant-card bg-white rounded-lg shadow-md border-l-4 p-6 border-gray-300 bg-gray-50 ">
+                    <div class="flex justify-between items-start mb-4">
+                        <div class="flex-1">
+                            <div class="flex items-center gap-3 mb-3">
+                                <h3 class="text-xl font-bold text-gray-900">Request for Proposals: Technical AI Safety Research</h3>
+                                <span class="text-sm px-3 py-1 rounded-full font-medium bg-gray-100 text-gray-800">
+                                    No deadline
+                                </span>
+                            </div>
+                            
+                            <p class="text-gray-600 mb-4 line-clamp-2 leading-relaxed">
+                                1.1 Adversarial machine learning ... If you have a proposal that doesn't fit this RFP, consider applying to our AI governance RFP, or our recently launched RFP on ...
+                            </p>
+                            
+                            <div class="grid grid-cols-2 md:grid-cols-4 gap-4 text-sm">
+                                <div class="bg-gray-50 p-3 rounded">
+                                    <span class="font-medium text-gray-700 block">📅 Deadline</span>
+                                    <span class="text-gray-900">No deadline found</span>
+                                </div>
+                                <div class="bg-gray-50 p-3 rounded">
+                                    <span class="font-medium text-gray-700 block">💰 Funding</span>
+                                    <span class="text-gray-900">Not specified</span>
+                                </div>
+                                <div class="bg-gray-50 p-3 rounded">
+                                    <span class="font-medium text-gray-700 block">🏛️ Agency</span>
+                                    <span class="text-gray-900">Open Philanthropy</span>
+                                </div>
+                                <div class="bg-gray-50 p-3 rounded">
+                                    <span class="font-medium text-gray-700 block">📍 Source</span>
+                                    <span class="text-xs bg-blue-100 text-blue-800 px-2 py-1 rounded">Web Search - General</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="ml-6 flex flex-col gap-3">
+                            
+                                <a href="https://www.openphilanthropy.org/request-for-proposals-technical-ai-safety-research/" target="_blank" 
+                                   class="flex items-center gap-2 px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition-colors shadow-md">
+                                    <span>🔗</span>
+                                    <span>View Grant</span>
+                                </a>
+                            
+                            
+                            <div class="text-center">
+                                <span class="text-xs font-medium text-gray-600">Priority</span>
+                                <div class="px-3 py-1 rounded-full text-xs font-medium bg-yellow-100 text-yellow-800">
+                                    Medium
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    
+                </div>
+                
+                <div class="grant-card bg-white rounded-lg shadow-md border-l-4 p-6 border-gray-300 bg-gray-50 ">
+                    <div class="flex justify-between items-start mb-4">
+                        <div class="flex-1">
+                            <div class="flex items-center gap-3 mb-3">
+                                <h3 class="text-xl font-bold text-gray-900">Digital Health DH - NSF SBIR - National Science Foundation</h3>
+                                <span class="text-sm px-3 py-1 rounded-full font-medium bg-gray-100 text-gray-800">
+                                    No deadline
+                                </span>
+                            </div>
+                            
+                            <p class="text-gray-600 mb-4 line-clamp-2 leading-relaxed">
+                                Digital Health (DH). The Neural Analytics Lucid™ M1 transcranial Doppler ... AI in healthcare and drug discovery. DH3. Healthcare Workflow, Economics and ...
+                            </p>
+                            
+                            <div class="grid grid-cols-2 md:grid-cols-4 gap-4 text-sm">
+                                <div class="bg-gray-50 p-3 rounded">
+                                    <span class="font-medium text-gray-700 block">📅 Deadline</span>
+                                    <span class="text-gray-900">No deadline found</span>
+                                </div>
+                                <div class="bg-gray-50 p-3 rounded">
+                                    <span class="font-medium text-gray-700 block">💰 Funding</span>
+                                    <span class="text-gray-900">Not specified</span>
+                                </div>
+                                <div class="bg-gray-50 p-3 rounded">
+                                    <span class="font-medium text-gray-700 block">🏛️ Agency</span>
+                                    <span class="text-gray-900">National Science Foundation (.gov)</span>
+                                </div>
+                                <div class="bg-gray-50 p-3 rounded">
+                                    <span class="font-medium text-gray-700 block">📍 Source</span>
+                                    <span class="text-xs bg-blue-100 text-blue-800 px-2 py-1 rounded">Web Search - General</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="ml-6 flex flex-col gap-3">
+                            
+                                <a href="https://seedfund.nsf.gov/topics/digital-health/" target="_blank" 
+                                   class="flex items-center gap-2 px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition-colors shadow-md">
+                                    <span>🔗</span>
+                                    <span>View Grant</span>
+                                </a>
+                            
+                            
+                            <div class="text-center">
+                                <span class="text-xs font-medium text-gray-600">Priority</span>
+                                <div class="px-3 py-1 rounded-full text-xs font-medium bg-yellow-100 text-yellow-800">
+                                    Medium
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    
+                </div>
+                
+                <div class="grant-card bg-white rounded-lg shadow-md border-l-4 p-6 border-gray-300 bg-gray-50 ">
+                    <div class="flex justify-between items-start mb-4">
+                        <div class="flex-1">
+                            <div class="flex items-center gap-3 mb-3">
+                                <h3 class="text-xl font-bold text-gray-900">2025 Call for Proposals: Ethics of Generative AI in Public ...</h3>
+                                <span class="text-sm px-3 py-1 rounded-full font-medium bg-gray-100 text-gray-800">
+                                    No deadline
+                                </span>
+                            </div>
+                            
+                            <p class="text-gray-600 mb-4 line-clamp-2 leading-relaxed">
+                                ... artificial intelligence in public communication for academics, media ... Grants · 2025 Call for Proposals: Ethics of Generative AI in Public Communication ...
+                            </p>
+                            
+                            <div class="grid grid-cols-2 md:grid-cols-4 gap-4 text-sm">
+                                <div class="bg-gray-50 p-3 rounded">
+                                    <span class="font-medium text-gray-700 block">📅 Deadline</span>
+                                    <span class="text-gray-900">No deadline found</span>
+                                </div>
+                                <div class="bg-gray-50 p-3 rounded">
+                                    <span class="font-medium text-gray-700 block">💰 Funding</span>
+                                    <span class="text-gray-900">Not specified</span>
+                                </div>
+                                <div class="bg-gray-50 p-3 rounded">
+                                    <span class="font-medium text-gray-700 block">🏛️ Agency</span>
+                                    <span class="text-gray-900">Penn State University</span>
+                                </div>
+                                <div class="bg-gray-50 p-3 rounded">
+                                    <span class="font-medium text-gray-700 block">📍 Source</span>
+                                    <span class="text-xs bg-blue-100 text-blue-800 px-2 py-1 rounded">Web Search - General</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="ml-6 flex flex-col gap-3">
+                            
+                                <a href="https://pagecenter.psu.edu/legacy-scholar-grants/2025-call-for-proposals-ethics-of-generative-ai-in-public-communication" target="_blank" 
+                                   class="flex items-center gap-2 px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition-colors shadow-md">
+                                    <span>🔗</span>
+                                    <span>View Grant</span>
+                                </a>
+                            
+                            
+                            <div class="text-center">
+                                <span class="text-xs font-medium text-gray-600">Priority</span>
+                                <div class="px-3 py-1 rounded-full text-xs font-medium bg-yellow-100 text-yellow-800">
+                                    Medium
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    
+                </div>
+                
+                <div class="grant-card bg-white rounded-lg shadow-md border-l-4 p-6 border-gray-300 bg-gray-50 ">
+                    <div class="flex justify-between items-start mb-4">
+                        <div class="flex-1">
+                            <div class="flex items-center gap-3 mb-3">
+                                <h3 class="text-xl font-bold text-gray-900">Request for Information on the Development of an Artificial ...</h3>
+                                <span class="text-sm px-3 py-1 rounded-full font-medium bg-gray-100 text-gray-800">
+                                    No deadline
+                                </span>
+                            </div>
+                            
+                            <p class="text-gray-600 mb-4 line-clamp-2 leading-relaxed">
+                                Request for Information on the Development of an Artificial Intelligence (AI) Action Plan. A Notice by the National Science Foundation on 02/06/ ...
+                            </p>
+                            
+                            <div class="grid grid-cols-2 md:grid-cols-4 gap-4 text-sm">
+                                <div class="bg-gray-50 p-3 rounded">
+                                    <span class="font-medium text-gray-700 block">📅 Deadline</span>
+                                    <span class="text-gray-900">No deadline found</span>
+                                </div>
+                                <div class="bg-gray-50 p-3 rounded">
+                                    <span class="font-medium text-gray-700 block">💰 Funding</span>
+                                    <span class="text-gray-900">Not specified</span>
+                                </div>
+                                <div class="bg-gray-50 p-3 rounded">
+                                    <span class="font-medium text-gray-700 block">🏛️ Agency</span>
+                                    <span class="text-gray-900">Federal Register (.gov)</span>
+                                </div>
+                                <div class="bg-gray-50 p-3 rounded">
+                                    <span class="font-medium text-gray-700 block">📍 Source</span>
+                                    <span class="text-xs bg-blue-100 text-blue-800 px-2 py-1 rounded">Web Search - General</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="ml-6 flex flex-col gap-3">
+                            
+                                <a href="https://www.federalregister.gov/documents/2025/02/06/2025-02305/request-for-information-on-the-development-of-an-artificial-intelligence-ai-action-plan" target="_blank" 
+                                   class="flex items-center gap-2 px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition-colors shadow-md">
+                                    <span>🔗</span>
+                                    <span>View Grant</span>
+                                </a>
+                            
+                            
+                            <div class="text-center">
+                                <span class="text-xs font-medium text-gray-600">Priority</span>
+                                <div class="px-3 py-1 rounded-full text-xs font-medium bg-yellow-100 text-yellow-800">
+                                    Medium
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    
+                </div>
+                
+                <div class="grant-card bg-white rounded-lg shadow-md border-l-4 p-6 border-gray-300 bg-gray-50 ">
+                    <div class="flex justify-between items-start mb-4">
+                        <div class="flex-1">
+                            <div class="flex items-center gap-3 mb-3">
+                                <h3 class="text-xl font-bold text-gray-900">Generative AI BAA Open Topic</h3>
+                                <span class="text-sm px-3 py-1 rounded-full font-medium bg-gray-100 text-gray-800">
+                                    No deadline
+                                </span>
+                            </div>
+                            
+                            <p class="text-gray-600 mb-4 line-clamp-2 leading-relaxed">
+                                2025. Topic Number: OSD254-P001. Solicitation Number: 25.4.1. Tagged as: SBIR ... www.ai.mil KEYWORDS: Generative Artificial Intelligence (AI); Government ...
+                            </p>
+                            
+                            <div class="grid grid-cols-2 md:grid-cols-4 gap-4 text-sm">
+                                <div class="bg-gray-50 p-3 rounded">
+                                    <span class="font-medium text-gray-700 block">📅 Deadline</span>
+                                    <span class="text-gray-900">No deadline found</span>
+                                </div>
+                                <div class="bg-gray-50 p-3 rounded">
+                                    <span class="font-medium text-gray-700 block">💰 Funding</span>
+                                    <span class="text-gray-900">Not specified</span>
+                                </div>
+                                <div class="bg-gray-50 p-3 rounded">
+                                    <span class="font-medium text-gray-700 block">🏛️ Agency</span>
+                                    <span class="text-gray-900">| SBIR (.gov)</span>
+                                </div>
+                                <div class="bg-gray-50 p-3 rounded">
+                                    <span class="font-medium text-gray-700 block">📍 Source</span>
+                                    <span class="text-xs bg-blue-100 text-blue-800 px-2 py-1 rounded">Web Search - General</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="ml-6 flex flex-col gap-3">
+                            
+                                <a href="https://www.sbir.gov/topics/11312" target="_blank" 
+                                   class="flex items-center gap-2 px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition-colors shadow-md">
+                                    <span>🔗</span>
+                                    <span>View Grant</span>
+                                </a>
+                            
+                            
+                            <div class="text-center">
+                                <span class="text-xs font-medium text-gray-600">Priority</span>
+                                <div class="px-3 py-1 rounded-full text-xs font-medium bg-yellow-100 text-yellow-800">
+                                    Medium
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    
+                </div>
+                
+                <div class="grant-card bg-white rounded-lg shadow-md border-l-4 p-6 border-gray-300 bg-gray-50 ">
+                    <div class="flex justify-between items-start mb-4">
+                        <div class="flex-1">
+                            <div class="flex items-center gap-3 mb-3">
+                                <h3 class="text-xl font-bold text-gray-900">Call for proposals: Responsible use of Artificial Intelligence</h3>
+                                <span class="text-sm px-3 py-1 rounded-full font-medium bg-gray-100 text-gray-800">
+                                    No deadline
+                                </span>
+                            </div>
+                            
+                            <p class="text-gray-600 mb-4 line-clamp-2 leading-relaxed">
+                                ... AI in the region. The initiative ... 2025 for researchers regarding the Call for Proposals on Responsible use of Artificial Intelligence.
+                            </p>
+                            
+                            <div class="grid grid-cols-2 md:grid-cols-4 gap-4 text-sm">
+                                <div class="bg-gray-50 p-3 rounded">
+                                    <span class="font-medium text-gray-700 block">📅 Deadline</span>
+                                    <span class="text-gray-900">No deadline found</span>
+                                </div>
+                                <div class="bg-gray-50 p-3 rounded">
+                                    <span class="font-medium text-gray-700 block">💰 Funding</span>
+                                    <span class="text-gray-900">Not specified</span>
+                                </div>
+                                <div class="bg-gray-50 p-3 rounded">
+                                    <span class="font-medium text-gray-700 block">🏛️ Agency</span>
+                                    <span class="text-gray-900">NordForsk</span>
+                                </div>
+                                <div class="bg-gray-50 p-3 rounded">
+                                    <span class="font-medium text-gray-700 block">📍 Source</span>
+                                    <span class="text-xs bg-blue-100 text-blue-800 px-2 py-1 rounded">Web Search - General</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="ml-6 flex flex-col gap-3">
+                            
+                                <a href="https://www.nordforsk.org/calls/call-proposals-responsible-use-artificial-intelligence" target="_blank" 
+                                   class="flex items-center gap-2 px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition-colors shadow-md">
+                                    <span>🔗</span>
+                                    <span>View Grant</span>
+                                </a>
+                            
+                            
+                            <div class="text-center">
+                                <span class="text-xs font-medium text-gray-600">Priority</span>
+                                <div class="px-3 py-1 rounded-full text-xs font-medium bg-yellow-100 text-yellow-800">
+                                    Medium
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    
+                </div>
+                
+                <div class="grant-card bg-white rounded-lg shadow-md border-l-4 p-6 border-gray-300 bg-gray-50 ">
+                    <div class="flex justify-between items-start mb-4">
+                        <div class="flex-1">
+                            <div class="flex items-center gap-3 mb-3">
+                                <h3 class="text-xl font-bold text-gray-900">AI FAST Challenge: Funding for Accelerated Study and ...</h3>
+                                <span class="text-sm px-3 py-1 rounded-full font-medium bg-gray-100 text-gray-800">
+                                    No deadline
+                                </span>
+                            </div>
+                            
+                            <p class="text-gray-600 mb-4 line-clamp-2 leading-relaxed">
+                                An overview of this funding opportunity and related resources are provided below. If interested in applying for funding, please read the full RFP, FAQ, and ...
+                            </p>
+                            
+                            <div class="grid grid-cols-2 md:grid-cols-4 gap-4 text-sm">
+                                <div class="bg-gray-50 p-3 rounded">
+                                    <span class="font-medium text-gray-700 block">📅 Deadline</span>
+                                    <span class="text-gray-900">No deadline found</span>
+                                </div>
+                                <div class="bg-gray-50 p-3 rounded">
+                                    <span class="font-medium text-gray-700 block">💰 Funding</span>
+                                    <span class="text-gray-900">Not specified</span>
+                                </div>
+                                <div class="bg-gray-50 p-3 rounded">
+                                    <span class="font-medium text-gray-700 block">🏛️ Agency</span>
+                                    <span class="text-gray-900">California Education Learning Lab</span>
+                                </div>
+                                <div class="bg-gray-50 p-3 rounded">
+                                    <span class="font-medium text-gray-700 block">📍 Source</span>
+                                    <span class="text-xs bg-blue-100 text-blue-800 px-2 py-1 rounded">Web Search - General</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="ml-6 flex flex-col gap-3">
+                            
+                                <a href="https://calearninglab.org/grant/ai-fast-challenge/" target="_blank" 
+                                   class="flex items-center gap-2 px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition-colors shadow-md">
+                                    <span>🔗</span>
+                                    <span>View Grant</span>
+                                </a>
+                            
+                            
+                            <div class="text-center">
+                                <span class="text-xs font-medium text-gray-600">Priority</span>
+                                <div class="px-3 py-1 rounded-full text-xs font-medium bg-yellow-100 text-yellow-800">
+                                    Medium
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    
+                </div>
+                
+                <div class="grant-card bg-white rounded-lg shadow-md border-l-4 p-6 border-gray-300 bg-gray-50 ">
+                    <div class="flex justify-between items-start mb-4">
+                        <div class="flex-1">
+                            <div class="flex items-center gap-3 mb-3">
+                                <h3 class="text-xl font-bold text-gray-900">Call for Proposals for CSU Artificial Intelligence ...</h3>
+                                <span class="text-sm px-3 py-1 rounded-full font-medium bg-gray-100 text-gray-800">
+                                    No deadline
+                                </span>
+                            </div>
+                            
+                            <p class="text-gray-600 mb-4 line-clamp-2 leading-relaxed">
+                                Call for Proposals for CSU Artificial Intelligence Educational Innovations Challenge ... artificial intelligence (AI) tools. This initiative aims ...
+                            </p>
+                            
+                            <div class="grid grid-cols-2 md:grid-cols-4 gap-4 text-sm">
+                                <div class="bg-gray-50 p-3 rounded">
+                                    <span class="font-medium text-gray-700 block">📅 Deadline</span>
+                                    <span class="text-gray-900">No deadline found</span>
+                                </div>
+                                <div class="bg-gray-50 p-3 rounded">
+                                    <span class="font-medium text-gray-700 block">💰 Funding</span>
+                                    <span class="text-gray-900">Not specified</span>
+                                </div>
+                                <div class="bg-gray-50 p-3 rounded">
+                                    <span class="font-medium text-gray-700 block">🏛️ Agency</span>
+                                    <span class="text-gray-900">Cal Poly College of Engineering</span>
+                                </div>
+                                <div class="bg-gray-50 p-3 rounded">
+                                    <span class="font-medium text-gray-700 block">📍 Source</span>
+                                    <span class="text-xs bg-blue-100 text-blue-800 px-2 py-1 rounded">Web Search - General</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="ml-6 flex flex-col gap-3">
+                            
+                                <a href="https://ceng.calpoly.edu/connection/2025/04/call-for-proposals-for-csu-artificial-intelligence-educational-innovations-challenge/" target="_blank" 
+                                   class="flex items-center gap-2 px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition-colors shadow-md">
+                                    <span>🔗</span>
+                                    <span>View Grant</span>
+                                </a>
+                            
+                            
+                            <div class="text-center">
+                                <span class="text-xs font-medium text-gray-600">Priority</span>
+                                <div class="px-3 py-1 rounded-full text-xs font-medium bg-yellow-100 text-yellow-800">
+                                    Medium
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    
+                </div>
+                
+                <div class="grant-card bg-white rounded-lg shadow-md border-l-4 p-6 border-gray-300 bg-gray-50 ">
+                    <div class="flex justify-between items-start mb-4">
+                        <div class="flex-1">
+                            <div class="flex items-center gap-3 mb-3">
+                                <h3 class="text-xl font-bold text-gray-900">Humanities Research Centers on Artificial Intelligence</h3>
+                                <span class="text-sm px-3 py-1 rounded-full font-medium bg-gray-100 text-gray-800">
+                                    No deadline
+                                </span>
+                            </div>
+                            
+                            <p class="text-gray-600 mb-4 line-clamp-2 leading-relaxed">
+                                Supports a more holistic understanding of artificial intelligence (AI) in ... Notice of Funding Opportunity 2025 (PDF) · Grants.gov application package.
+                            </p>
+                            
+                            <div class="grid grid-cols-2 md:grid-cols-4 gap-4 text-sm">
+                                <div class="bg-gray-50 p-3 rounded">
+                                    <span class="font-medium text-gray-700 block">📅 Deadline</span>
+                                    <span class="text-gray-900">No deadline found</span>
+                                </div>
+                                <div class="bg-gray-50 p-3 rounded">
+                                    <span class="font-medium text-gray-700 block">💰 Funding</span>
+                                    <span class="text-gray-900">Not specified</span>
+                                </div>
+                                <div class="bg-gray-50 p-3 rounded">
+                                    <span class="font-medium text-gray-700 block">🏛️ Agency</span>
+                                    <span class="text-gray-900">National Endowment for the Humanities (.gov)</span>
+                                </div>
+                                <div class="bg-gray-50 p-3 rounded">
+                                    <span class="font-medium text-gray-700 block">📍 Source</span>
+                                    <span class="text-xs bg-blue-100 text-blue-800 px-2 py-1 rounded">Web Search - General</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="ml-6 flex flex-col gap-3">
+                            
+                                <a href="https://www.neh.gov/program/humanities-research-centers-artificial-intelligence" target="_blank" 
+                                   class="flex items-center gap-2 px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition-colors shadow-md">
+                                    <span>🔗</span>
+                                    <span>View Grant</span>
+                                </a>
+                            
+                            
+                            <div class="text-center">
+                                <span class="text-xs font-medium text-gray-600">Priority</span>
+                                <div class="px-3 py-1 rounded-full text-xs font-medium bg-yellow-100 text-yellow-800">
+                                    Medium
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    
+                </div>
+                
+                <div class="grant-card bg-white rounded-lg shadow-md border-l-4 p-6 border-gray-300 bg-gray-50 ">
+                    <div class="flex justify-between items-start mb-4">
+                        <div class="flex-1">
+                            <div class="flex items-center gap-3 mb-3">
+                                <h3 class="text-xl font-bold text-gray-900">Expired RFA-AG-24-049: Artificial Intelligence in Pre-clinical ...</h3>
+                                <span class="text-sm px-3 py-1 rounded-full font-medium bg-gray-100 text-gray-800">
+                                    No deadline
+                                </span>
+                            </div>
+                            
+                            <p class="text-gray-600 mb-4 line-clamp-2 leading-relaxed">
+                                This Notice of Funding Opportunity (NOFO) invites applications that propose to apply existing or newly developed artificial intelligence (AI) and machine ...
+                            </p>
+                            
+                            <div class="grid grid-cols-2 md:grid-cols-4 gap-4 text-sm">
+                                <div class="bg-gray-50 p-3 rounded">
+                                    <span class="font-medium text-gray-700 block">📅 Deadline</span>
+                                    <span class="text-gray-900">No deadline found</span>
+                                </div>
+                                <div class="bg-gray-50 p-3 rounded">
+                                    <span class="font-medium text-gray-700 block">💰 Funding</span>
+                                    <span class="text-gray-900">Not specified</span>
+                                </div>
+                                <div class="bg-gray-50 p-3 rounded">
+                                    <span class="font-medium text-gray-700 block">🏛️ Agency</span>
+                                    <span class="text-gray-900">National Institutes of Health (NIH) (.gov)</span>
+                                </div>
+                                <div class="bg-gray-50 p-3 rounded">
+                                    <span class="font-medium text-gray-700 block">📍 Source</span>
+                                    <span class="text-xs bg-blue-100 text-blue-800 px-2 py-1 rounded">Web Search - General</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="ml-6 flex flex-col gap-3">
+                            
+                                <a href="https://grants.nih.gov/grants/guide/rfa-files/RFA-AG-24-049.html" target="_blank" 
+                                   class="flex items-center gap-2 px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition-colors shadow-md">
+                                    <span>🔗</span>
+                                    <span>View Grant</span>
+                                </a>
+                            
+                            
+                            <div class="text-center">
+                                <span class="text-xs font-medium text-gray-600">Priority</span>
+                                <div class="px-3 py-1 rounded-full text-xs font-medium bg-yellow-100 text-yellow-800">
+                                    Medium
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    
+                </div>
+                
+                <div class="grant-card bg-white rounded-lg shadow-md border-l-4 p-6 border-gray-300 bg-gray-50 ">
+                    <div class="flex justify-between items-start mb-4">
+                        <div class="flex-1">
+                            <div class="flex items-center gap-3 mb-3">
+                                <h3 class="text-xl font-bold text-gray-900">Artificial Intelligence / Machine Learning Demonstration ...</h3>
+                                <span class="text-sm px-3 py-1 rounded-full font-medium bg-gray-100 text-gray-800">
+                                    No deadline
+                                </span>
+                            </div>
+                            
+                            <p class="text-gray-600 mb-4 line-clamp-2 leading-relaxed">
+                                We're excited to announce the 2nd Open Proposals call for UCSF's Artificial Intelligence/Machine Learning Demonstration Projects - “AI Pilots”
+                            </p>
+                            
+                            <div class="grid grid-cols-2 md:grid-cols-4 gap-4 text-sm">
+                                <div class="bg-gray-50 p-3 rounded">
+                                    <span class="font-medium text-gray-700 block">📅 Deadline</span>
+                                    <span class="text-gray-900">No deadline found</span>
+                                </div>
+                                <div class="bg-gray-50 p-3 rounded">
+                                    <span class="font-medium text-gray-700 block">💰 Funding</span>
+                                    <span class="text-gray-900">Not specified</span>
+                                </div>
+                                <div class="bg-gray-50 p-3 rounded">
+                                    <span class="font-medium text-gray-700 block">🏛️ Agency</span>
+                                    <span class="text-gray-900">AI@UCSF</span>
+                                </div>
+                                <div class="bg-gray-50 p-3 rounded">
+                                    <span class="font-medium text-gray-700 block">📍 Source</span>
+                                    <span class="text-xs bg-blue-100 text-blue-800 px-2 py-1 rounded">Web Search - General</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="ml-6 flex flex-col gap-3">
+                            
+                                <a href="https://ai.ucsf.edu/events/artificial-intelligence-machine-learning-demonstration-projects-2025" target="_blank" 
+                                   class="flex items-center gap-2 px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition-colors shadow-md">
+                                    <span>🔗</span>
+                                    <span>View Grant</span>
+                                </a>
+                            
+                            
+                            <div class="text-center">
+                                <span class="text-xs font-medium text-gray-600">Priority</span>
+                                <div class="px-3 py-1 rounded-full text-xs font-medium bg-yellow-100 text-yellow-800">
+                                    Medium
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    
+                </div>
+                
+                <div class="grant-card bg-white rounded-lg shadow-md border-l-4 p-6 border-gray-300 bg-gray-50 ">
+                    <div class="flex justify-between items-start mb-4">
+                        <div class="flex-1">
+                            <div class="flex items-center gap-3 mb-3">
+                                <h3 class="text-xl font-bold text-gray-900">Call for Proposals - 2025 Internet2 Technology Exchange</h3>
+                                <span class="text-sm px-3 py-1 rounded-full font-medium bg-gray-100 text-gray-800">
+                                    No deadline
+                                </span>
+                            </div>
+                            
+                            <p class="text-gray-600 mb-4 line-clamp-2 leading-relaxed">
+                                Call for Proposals. December 8 – 12 Denver, CO. We're Counting on Your Input ... Recognizing that Artificial Intelligence (AI) is having an impact on all ...
+                            </p>
+                            
+                            <div class="grid grid-cols-2 md:grid-cols-4 gap-4 text-sm">
+                                <div class="bg-gray-50 p-3 rounded">
+                                    <span class="font-medium text-gray-700 block">📅 Deadline</span>
+                                    <span class="text-gray-900">No deadline found</span>
+                                </div>
+                                <div class="bg-gray-50 p-3 rounded">
+                                    <span class="font-medium text-gray-700 block">💰 Funding</span>
+                                    <span class="text-gray-900">Not specified</span>
+                                </div>
+                                <div class="bg-gray-50 p-3 rounded">
+                                    <span class="font-medium text-gray-700 block">🏛️ Agency</span>
+                                    <span class="text-gray-900">STOVA - Client Login</span>
+                                </div>
+                                <div class="bg-gray-50 p-3 rounded">
+                                    <span class="font-medium text-gray-700 block">📍 Source</span>
+                                    <span class="text-xs bg-blue-100 text-blue-800 px-2 py-1 rounded">Web Search - General</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="ml-6 flex flex-col gap-3">
+                            
+                                <a href="https://events.internet2.edu/website/84273/call-for-proposals/" target="_blank" 
+                                   class="flex items-center gap-2 px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition-colors shadow-md">
+                                    <span>🔗</span>
+                                    <span>View Grant</span>
+                                </a>
+                            
+                            
+                            <div class="text-center">
+                                <span class="text-xs font-medium text-gray-600">Priority</span>
+                                <div class="px-3 py-1 rounded-full text-xs font-medium bg-yellow-100 text-yellow-800">
+                                    Medium
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    
+                </div>
+                
+                <div class="grant-card bg-white rounded-lg shadow-md border-l-4 p-6 border-gray-300 bg-gray-50 ">
+                    <div class="flex justify-between items-start mb-4">
+                        <div class="flex-1">
+                            <div class="flex items-center gap-3 mb-3">
+                                <h3 class="text-xl font-bold text-gray-900">Small Business Innovation Research (SBIR) | IES</h3>
+                                <span class="text-sm px-3 py-1 rounded-full font-medium bg-gray-100 text-gray-800">
+                                    No deadline
+                                </span>
+                            </div>
+                            
+                            <p class="text-gray-600 mb-4 line-clamp-2 leading-relaxed">
+                                Small Business Innovation Research (SBIR) Program & Applicant Information Fiscal Year 2025 ... artificial intelligence (AI) adaptive tutors, data dashboards, and ...
+                            </p>
+                            
+                            <div class="grid grid-cols-2 md:grid-cols-4 gap-4 text-sm">
+                                <div class="bg-gray-50 p-3 rounded">
+                                    <span class="font-medium text-gray-700 block">📅 Deadline</span>
+                                    <span class="text-gray-900">No deadline found</span>
+                                </div>
+                                <div class="bg-gray-50 p-3 rounded">
+                                    <span class="font-medium text-gray-700 block">💰 Funding</span>
+                                    <span class="text-gray-900">Not specified</span>
+                                </div>
+                                <div class="bg-gray-50 p-3 rounded">
+                                    <span class="font-medium text-gray-700 block">🏛️ Agency</span>
+                                    <span class="text-gray-900">Institute of Education Sciences (IES) (.gov)</span>
+                                </div>
+                                <div class="bg-gray-50 p-3 rounded">
+                                    <span class="font-medium text-gray-700 block">📍 Source</span>
+                                    <span class="text-xs bg-blue-100 text-blue-800 px-2 py-1 rounded">Web Search - General</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="ml-6 flex flex-col gap-3">
+                            
+                                <a href="https://ies.ed.gov/funding/research/programs/small-business-innovation-research-sbir" target="_blank" 
+                                   class="flex items-center gap-2 px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition-colors shadow-md">
+                                    <span>🔗</span>
+                                    <span>View Grant</span>
+                                </a>
+                            
+                            
+                            <div class="text-center">
+                                <span class="text-xs font-medium text-gray-600">Priority</span>
+                                <div class="px-3 py-1 rounded-full text-xs font-medium bg-yellow-100 text-yellow-800">
+                                    Medium
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    
+                </div>
+                
+                <div class="grant-card bg-white rounded-lg shadow-md border-l-4 p-6 border-gray-300 bg-gray-50 ">
+                    <div class="flex justify-between items-start mb-4">
+                        <div class="flex-1">
+                            <div class="flex items-center gap-3 mb-3">
+                                <h3 class="text-xl font-bold text-gray-900">ASCR Funding Opportunities</h3>
+                                <span class="text-sm px-3 py-1 rounded-full font-medium bg-gray-100 text-gray-800">
+                                    No deadline
+                                </span>
+                            </div>
+                            
+                            <p class="text-gray-600 mb-4 line-clamp-2 leading-relaxed">
+                                Funding Opportunity Announcements (FOAs). May be open to one or more ... Artificial Intelligence for Science · Biopreparedness Research Virtual ...
+                            </p>
+                            
+                            <div class="grid grid-cols-2 md:grid-cols-4 gap-4 text-sm">
+                                <div class="bg-gray-50 p-3 rounded">
+                                    <span class="font-medium text-gray-700 block">📅 Deadline</span>
+                                    <span class="text-gray-900">No deadline found</span>
+                                </div>
+                                <div class="bg-gray-50 p-3 rounded">
+                                    <span class="font-medium text-gray-700 block">💰 Funding</span>
+                                    <span class="text-gray-900">Not specified</span>
+                                </div>
+                                <div class="bg-gray-50 p-3 rounded">
+                                    <span class="font-medium text-gray-700 block">🏛️ Agency</span>
+                                    <span class="text-gray-900">OSTI (.gov)</span>
+                                </div>
+                                <div class="bg-gray-50 p-3 rounded">
+                                    <span class="font-medium text-gray-700 block">📍 Source</span>
+                                    <span class="text-xs bg-blue-100 text-blue-800 px-2 py-1 rounded">Web Search - General</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="ml-6 flex flex-col gap-3">
+                            
+                                <a href="https://science.osti.gov/ascr/Funding-Opportunities" target="_blank" 
+                                   class="flex items-center gap-2 px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition-colors shadow-md">
+                                    <span>🔗</span>
+                                    <span>View Grant</span>
+                                </a>
+                            
+                            
+                            <div class="text-center">
+                                <span class="text-xs font-medium text-gray-600">Priority</span>
+                                <div class="px-3 py-1 rounded-full text-xs font-medium bg-yellow-100 text-yellow-800">
+                                    Medium
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    
+                </div>
+                
+                <div class="grant-card bg-white rounded-lg shadow-md border-l-4 p-6 border-red-700 bg-red-100 ">
+                    <div class="flex justify-between items-start mb-4">
+                        <div class="flex-1">
+                            <div class="flex items-center gap-3 mb-3">
+                                <h3 class="text-xl font-bold text-gray-900">SBIR and STTR Funding Opportunities</h3>
+                                <span class="text-sm px-3 py-1 rounded-full font-medium bg-gray-100 text-gray-800">
+                                    341 days ago
+                                </span>
+                            </div>
+                            
+                            <p class="text-gray-600 mb-4 line-clamp-2 leading-relaxed">
+                                NOT-AI-24-050 · NIAID, 06/28/2024, 05/08/2027 ... Artificial Intelligence/Machine Learning Tools for Improved Assessment in Biomedical and Behavioral Research ...
+                            </p>
+                            
+                            <div class="grid grid-cols-2 md:grid-cols-4 gap-4 text-sm">
+                                <div class="bg-gray-50 p-3 rounded">
+                                    <span class="font-medium text-gray-700 block">📅 Deadline</span>
+                                    <span class="text-gray-900">Fri, Jun 28, 2024</span>
+                                </div>
+                                <div class="bg-gray-50 p-3 rounded">
+                                    <span class="font-medium text-gray-700 block">💰 Funding</span>
+                                    <span class="text-gray-900">Not specified</span>
+                                </div>
+                                <div class="bg-gray-50 p-3 rounded">
+                                    <span class="font-medium text-gray-700 block">🏛️ Agency</span>
+                                    <span class="text-gray-900">National Institutes of Health (NIH) (.gov)</span>
+                                </div>
+                                <div class="bg-gray-50 p-3 rounded">
+                                    <span class="font-medium text-gray-700 block">📍 Source</span>
+                                    <span class="text-xs bg-blue-100 text-blue-800 px-2 py-1 rounded">Web Search - General</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="ml-6 flex flex-col gap-3">
+                            
+                                <a href="https://seed.nih.gov/small-business-funding/find-funding/sbir-sttr-funding-opportunities" target="_blank" 
+                                   class="flex items-center gap-2 px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition-colors shadow-md">
+                                    <span>🔗</span>
+                                    <span>View Grant</span>
+                                </a>
+                            
+                            
+                            <div class="text-center">
+                                <span class="text-xs font-medium text-gray-600">Priority</span>
+                                <div class="px-3 py-1 rounded-full text-xs font-medium bg-yellow-100 text-yellow-800">
+                                    Medium
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    
+                </div>
+                
+        </div>
+        
+        <div class="mt-12 p-6 bg-white rounded-lg shadow-md">
+            <h3 class="text-lg font-bold text-gray-900 mb-4">📋 Team Action Items</h3>
+            <div class="grid md:grid-cols-3 gap-6 text-sm">
+                <div class="p-4 bg-blue-50 rounded">
+                    <p class="font-bold text-blue-800 mb-2">🎯 Immediate Actions</p>
+                    <p class="text-blue-700">Review all red-highlighted urgent grants and assign team members</p>
+                </div>
+                <div class="p-4 bg-green-50 rounded">
+                    <p class="font-bold text-green-800 mb-2">📅 This Week</p>
+                    <p class="text-green-700">Schedule team meeting to discuss application strategy for high-priority grants</p>
+                </div>
+                <div class="p-4 bg-purple-50 rounded">
+                    <p class="font-bold text-purple-800 mb-2">🔄 Process</p>
+                    <p class="text-purple-700">Dashboard updates automatically daily. Bookmark this page for regular check-ins</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="mt-8 text-center text-gray-500 text-sm">
+            <p>🤖 Dashboard automatically generated by n8n workflow | Last updated: 6/4/2025, 12:12:44 PM</p>
+            <p>💡 Missing deadlines? The system continuously improves deadline extraction from grant pages</p>
+            <p>🔗 Share this URL with team members: <strong>https://sasqcow.github.io/grant-dashboard/</strong></p>
+        </div>
+    </div>
+    
+    <script>
+        document.querySelectorAll('a[href^="http"]').forEach(link => {
+            link.addEventListener('click', function() {
+                console.log('Grant link clicked:', this.href);
+            });
+        });
+        
+        setTimeout(() => {
+            if (confirm('Dashboard data might be outdated. Refresh page for latest grants?')) {
+                location.reload();
+            }
+        }, 24 * 60 * 60 * 1000);
+        
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'r' && e.ctrlKey) {
+                e.preventDefault();
+                location.reload();
+            }
+        });
+    </script>
+</body>
+</html>
